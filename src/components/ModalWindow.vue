@@ -9,7 +9,7 @@
       <div class="v-popup__content">
         <div class="info">
           Используйте налоговый вычет чтобы погасить ипотеку досрочно. Размер
-          налогового вычета составляетне более 13% от своего официального
+          налогового вычета составляет не более 13% от своего официального
           годового дохода.
         </div>
 
@@ -224,6 +224,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      margin-bottom: 16px;
       &__title {
         font-family: Lab Grotesque;
         font-style: normal;

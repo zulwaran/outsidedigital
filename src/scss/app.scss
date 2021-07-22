@@ -1,20 +1,63 @@
-@font-face {
-    font-family: 'Lab Grotesque';
-    src: local('Lab Grotesque Light'), local('Lab-Grotesque-Light'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.woff2') format('woff2'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.woff') format('woff'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Lab Grotesque";
-    src: local("Lab Grotesque Regular"), local("Lab-Grotesque-Regular"), url("~@/assets/fonts/LabGrotesque/Regular/LabGrotesque-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Lab Grotesque';
-    src: local('Lab Grotesque Medium'), local('Lab-Grotesque-Medium'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.woff2') format('woff2'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.woff') format('woff'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
+    @font-face {
+        font-family: 'Lab Grotesque';
+        src: local('Lab Grotesque Light'), local('Lab-Grotesque-Light'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.woff2') format('woff2'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.woff') format('woff'), url('~@/assets/fonts/LabGrotesque/Light/LabGrotesque-Light.ttf') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Lab Grotesque";
+        src: local("Lab Grotesque Regular"), local("Lab-Grotesque-Regular"), url("~@/assets/fonts/LabGrotesque/Regular/LabGrotesque-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: 'Lab Grotesque';
+        src: local('Lab Grotesque Medium'), local('Lab-Grotesque-Medium'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.woff2') format('woff2'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.woff') format('woff'), url('~@/assets/fonts/LabGrotesque/Medium/LabGrotesque-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+    }
+    
+    @media (max-width: 768px) {
+        .v-popup {
+            width: 453px;
+        }
+    }
+    
+    @media (max-width: 470px) {
+        .fa-times {
+            font-size: 24px;
+            right: 22px;
+            top: 22px;
+        }
+        .v-popup {
+            width: 100vw;
+            height: 100vh;
+            max-height: none;
+            border-radius: 0;
+            top: 0;
+            padding: 32px 16px;
+            &__header {
+                .title {
+                    font-size: 18px;
+                }
+            }
+            &__content {
+                .info {
+                    max-width: none;
+                    font-size: 12px;
+                }
+            }
+            .tags {
+                flex-wrap: wrap;
+                p {
+                    width: 100%;
+                    margin-bottom: 24px;
+                }
+                button {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
