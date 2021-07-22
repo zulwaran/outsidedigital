@@ -16,6 +16,9 @@
         <div class="salary">
           <div class="salary__title">Ваша зарплата в месяц</div>
           <input
+            :class="[
+              $v.salary.$error || salary == '0 ₽' ? 'salary__error' : '',
+            ]"
             type="text"
             placeholder="Введите данные"
             v-model="salary"
@@ -116,6 +119,7 @@ export default {
       this.paymentList = [];
       if (salary == null || salary == "0 ₽") {
         this.paymentVisible = false;
+        console.log(this.$v.salary.$error);
         this.$v.$touch();
         return;
       }
@@ -269,6 +273,9 @@ export default {
         line-height: 24px;
         color: #ea0029;
       }
+      &__error {
+        border: 1px solid #ea0029 !important;
+      }
       small {
         font-family: Lab Grotesque;
         font-style: normal;
@@ -285,6 +292,12 @@ export default {
         border: 1px solid #dfe3e6;
         margin-bottom: 4px;
         border-radius: 3px;
+        &:hover {
+          border: 1px solid #000000;
+        }
+        &:disabled {
+          border: 1px solid #808080;
+        }
       }
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
@@ -385,6 +398,14 @@ export default {
       font-weight: 500;
       font-size: 16px;
       line-height: 24px;
+      &:disabled,
+      [disabled] {
+        border: 1px solid #bec5cc;
+        color: #fff;
+        cursor: default;
+        box-shadow: none;
+        background: #bec5cc;
+      }
     }
   }
 }
