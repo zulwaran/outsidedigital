@@ -21,6 +21,13 @@
             v-model="salary"
             v-money="salary !== null ? money : null"
           />
+          <small
+            v-if="
+              ($v.salary.$dirty && !$v.salary.required) ||
+              ($v.salary.$dirty && salary == '0 ₽')
+            "
+            >Поле обязательное для заполнения</small
+          >
           <button class="salary__calculate" @click="сalculate(salary)">
             Рассчитать
           </button>
@@ -58,6 +65,7 @@
 </template>
 
 <script>
+import { required } from "../../node_modules/vuelidate/lib/validators";
 export default {
   name: "v-popup",
   props: {
@@ -67,7 +75,6 @@ export default {
   },
   data() {
     return {
-      a: 1,
       strict: false,
       paymentVisible: false,
       salary: null,
@@ -79,6 +86,9 @@ export default {
         precision: 0,
       },
     };
+  },
+  validations: {
+    salary: { required },
   },
   methods: {
     declOfNumStart(number, titles) {
@@ -106,7 +116,7 @@ export default {
       this.paymentList = [];
       if (salary == null || salary == "0 ₽") {
         this.paymentVisible = false;
-        console.log("Введите месячную зарплату");
+        this.$v.$touch();
         return;
       }
       salary = salary.replace(/\s/g, "");
@@ -259,12 +269,22 @@ export default {
         line-height: 24px;
         color: #ea0029;
       }
+      small {
+        font-family: Lab Grotesque;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        color: #ea0029;
+        margin-bottom: 4px;
+      }
       input {
-        padding: 8px 10px;
+        padding: 12px 10px;
         width: 100%;
         outline: none;
         border: 1px solid #dfe3e6;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
+        border-radius: 3px;
       }
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
