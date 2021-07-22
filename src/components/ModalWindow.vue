@@ -15,29 +15,22 @@
 
         <div class="salary">
           <div class="salary__title">Ваша зарплата в месяц</div>
-          <input type="number" placeholder="Введите данные" />
-          <button class="salary__calculate" @click="paymentVisible = true">
+          <input type="number" placeholder="Введите данные" v-model="salary" />
+          <button class="salary__calculate" @click="сalculate(salary)">
             Рассчитать
           </button>
         </div>
 
         <div class="payment" v-if="paymentVisible">
           <p>Итого можете внести в качестве досрочных:</p>
-          <div class="payment__year">
-            <input type="checkbox" />
-            78000 рублей <span>в 1-й год</span>
-          </div>
-          <div class="payment__year">
-            <input type="checkbox" />
-            78000 рублей <span>во 2-й год</span>
-          </div>
-          <div class="payment__year">
-            <input type="checkbox" />
-            78000 рублей <span>в 3-ий год</span>
-          </div>
-          <div class="payment__year">
-            <input type="checkbox" />
-            78000 рублей <span>в 4-ый год</span>
+          <div
+            class="payment__year"
+            v-for="elem in paymentList"
+            :key="elem.index"
+          >
+            <i class="fas fa-check" v-if="elem.checkbox == true"></i>
+            <i class="fas fa-check disabled-checkbox" v-else></i>
+            {{ elem.tax }} <span>{{ elem.year }} год</span>
           </div>
         </div>
 
@@ -71,9 +64,67 @@ export default {
     return {
       strict: false,
       paymentVisible: false,
+      salary: null,
+      paymentList: [],
+      maxTax: 260000,
     };
   },
   methods: {
+    declOfNumStart(number, titles) {
+      if (number == 2) {
+        return titles[1];
+      }
+      return titles[0];
+    },
+    declOfNumEnd(number, titles) {
+      let arr1 = [1, 4, 5, 9, 0];
+      let arr2 = [2, 6, 7, 8];
+      number = Math.abs(number) % 100;
+      var n1 = number % 10;
+      if ((number > 10 && number < 20) || arr1.includes(n1)) {
+        return titles[0];
+      }
+      if (arr2.includes(n1)) {
+        return titles[1];
+      }
+      if (n1 == 3) {
+        return titles[2];
+      }
+    },
+    сalculate(salary) {
+      this.paymentList = [];
+      if (salary == null || salary == 0) {
+        this.paymentVisible = false;
+        console.log("Введите месячную зарплату");
+        return;
+      }
+      let maxTax = this.maxTax;
+      let count = 0;
+      let tax = salary * 12 * 0.13;
+      while (maxTax > tax) {
+        count += 1;
+        maxTax = maxTax - tax;
+        const obj = {
+          year:
+            this.declOfNumStart(count, ["в ", "во "]) +
+            String(count) +
+            this.declOfNumEnd(count, ["-ый", "-ой", "-ий"]),
+          tax: tax,
+          checkbox: true,
+        };
+        this.paymentList.push(obj);
+      }
+      count += 1;
+      this.paymentList.push({
+        year:
+          this.declOfNumStart(count, ["в ", "во "]) +
+          String(count) +
+          this.declOfNumEnd(count, ["-ый", "-ой", "-ий"]),
+        tax: maxTax,
+        checkbox: false,
+      });
+      this.paymentVisible = true;
+    },
     closePopup() {
       this.$emit("closePopup");
     },
@@ -90,13 +141,42 @@ export default {
 
 <style lang="scss">
 @import url("../scss/app.scss");
-.fas {
+.fa-times {
   color: red;
   font-size: 27px;
   position: absolute;
   right: 27px;
   top: 27px;
   cursor: pointer;
+}
+.fa-check {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+      255.35deg,
+      #dc3131 0.83%,
+      rgba(255, 79, 79, 0) 108.93%
+    ),
+    #ff5e56;
+  color: #fff;
+  border-radius: 6px;
+  width: 20px;
+  height: 20px;
+  margin-right: 11px;
+}
+.disabled-checkbox {
+  background: #ffffff;
+  border: 1px solid #dfe3e6;
+  border-radius: 6px;
+}
+.square {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 1px solid #dfe3e6;
+  box-sizing: border-box;
+  border-radius: 6px;
 }
 .popup__wrapper {
   background: rgba(0, 0, 0, 0.3);
@@ -117,6 +197,8 @@ export default {
   width: 552px;
   background: #fff;
   border-radius: 30px;
+  max-height: 90vh;
+  overflow: hidden;
   &__header {
     .title {
       font-family: Lab Grotesque;
@@ -178,6 +260,7 @@ export default {
     }
 
     .payment {
+      position: relative;
       p {
         margin-bottom: 16px;
         font-family: Lab Grotesque;
