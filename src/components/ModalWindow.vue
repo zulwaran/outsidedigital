@@ -19,7 +19,7 @@
             type="text"
             placeholder="Введите данные"
             v-model="salary"
-            v-money="money"
+            v-money="salary !== null ? money : null"
           />
           <button class="salary__calculate" @click="сalculate(salary)">
             Рассчитать
@@ -67,9 +67,10 @@ export default {
   },
   data() {
     return {
+      a: 1,
       strict: false,
       paymentVisible: false,
-      salary: "",
+      salary: null,
       paymentList: [],
       maxTax: 260000,
       money: {
@@ -102,14 +103,14 @@ export default {
       }
     },
     сalculate(salary) {
-      salary = salary.replace(/\s/g, "");
-      salary = salary.replace("₽", "");
       this.paymentList = [];
-      if (salary == null || salary == 0) {
+      if (salary == null || salary == "0 ₽") {
         this.paymentVisible = false;
         console.log("Введите месячную зарплату");
         return;
       }
+      salary = salary.replace(/\s/g, "");
+      salary = salary.replace("₽", "");
       let maxTax = this.maxTax;
       let count = 0;
       let tax = salary * 12 * 0.13;
