@@ -15,8 +15,12 @@
 
         <div class="salary">
           <div class="salary__title">Ваша зарплата в месяц</div>
-          <input type="number" placeholder="Введите данные" v-model="salary" />
-          <button class="salary__calculate" @click="сalculate(salary)">
+          <input
+            type="text"
+            placeholder="Введите данные"
+            v-model="modelNumber"
+          />
+          <button class="salary__calculate" @click="сalculate(modelNumber)">
             Рассчитать
           </button>
         </div>
@@ -64,9 +68,10 @@ export default {
     return {
       strict: false,
       paymentVisible: false,
-      salary: null,
+      salary: "",
       paymentList: [],
       maxTax: 260000,
+      indicatorChange: false,
     };
   },
   methods: {
@@ -92,6 +97,7 @@ export default {
       }
     },
     сalculate(salary) {
+      salary = salary.replace(/\s/g, "");
       this.paymentList = [];
       if (salary == null || salary == 0) {
         this.paymentVisible = false;
@@ -127,6 +133,18 @@ export default {
     },
     closePopup() {
       this.$emit("closePopup");
+    },
+  },
+  computed: {
+    modelNumber: {
+      get() {
+        return this.indicatorChange
+          ? this.salary
+          : this.salary.toLocaleString();
+      },
+      set(value) {
+        this.salary = +value.replace(/\s/g, "");
+      },
     },
   },
   mounted() {
