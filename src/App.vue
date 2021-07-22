@@ -38,11 +38,6 @@ export default {
   padding: 0;
 }
 #app {
-  font-family: Lab Grotesque;
-  font-style: normal;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
   background: linear-gradient(
       255.35deg,
       #dc3131 0.83%,

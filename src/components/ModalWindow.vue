@@ -240,7 +240,9 @@ export default {
     width: 0px;
   }
   &__header {
-    .title {  
+    .title {
+      font-family: Lab Grotesque;
+      font-style: normal;
       font-weight: 500;
       font-size: 28px;
       line-height: 40px;
@@ -250,6 +252,10 @@ export default {
   &__content {
     .info {
       max-width: 95%;
+      font-family: Lab Grotesque;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
       line-height: 24px;
       color: #808080;
       margin-bottom: 30px;
@@ -260,14 +266,20 @@ export default {
       align-items: flex-start;
       margin-bottom: 16px;
       &__title {
+        font-family: Lab Grotesque;
+        font-style: normal;
         font-weight: 500;
+        font-size: 14px;
         line-height: 24px;
         color: #000000;
         margin-bottom: 8px;
       }
       &__calculate {
         padding: 0;
+        font-family: Lab Grotesque;
+        font-style: normal;
         font-weight: 500;
+        font-size: 14px;
         line-height: 24px;
         color: #ea0029;
       }
@@ -275,6 +287,9 @@ export default {
         border: 1px solid #ea0029 !important;
       }
       small {
+        font-family: Lab Grotesque;
+        font-style: normal;
+        font-weight: 400;
         font-size: 10px;
         line-height: 12px;
         color: #ea0029;
@@ -308,12 +323,18 @@ export default {
       position: relative;
       p {
         margin-bottom: 16px;
+        font-family: Lab Grotesque;
+        font-style: normal;
         font-weight: 500;
+        font-size: 14px;
         line-height: 24px;
         color: #000000;
       }
       span {
+        font-family: Lab Grotesque;
+        font-style: normal;
         font-weight: 500;
+        font-size: 14px;
         line-height: 24px;
         color: #808080;
       }
@@ -321,6 +342,10 @@ export default {
         margin-right: 11px;
       }
       &__year {
+        font-family: Lab Grotesque;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
         line-height: 24px;
         color: #000000;
         border-bottom: 1px solid #dfe3e6;
@@ -334,7 +359,10 @@ export default {
       display: flex;
       align-items: center;
       p {
+        font-family: Lab Grotesque;
+        font-style: normal;
         font-weight: 500;
+        font-size: 14px;
         line-height: 24px;
         color: #000000;
         margin-right: 76px;
@@ -345,6 +373,9 @@ export default {
         border-radius: 50px;
         color: #000;
         margin-right: 16px;
+        font-family: Lab Grotesque;
+        font-style: normal;
+        font-weight: 400;
         font-size: 14px;
         line-height: 24px;
         &.active {
@@ -372,6 +403,8 @@ export default {
       box-shadow: 0px 0px 24px rgba(234, 0, 41, 0.33);
       border-radius: 6px;
       width: 100%;
+      font-family: Lab Grotesque;
+      font-style: normal;
       font-weight: 500;
       font-size: 16px;
       line-height: 24px;
