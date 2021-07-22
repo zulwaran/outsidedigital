@@ -18,9 +18,10 @@
           <input
             type="text"
             placeholder="Введите данные"
-            v-model="modelNumber"
+            v-model="salary"
+            v-money="money"
           />
-          <button class="salary__calculate" @click="сalculate(modelNumber)">
+          <button class="salary__calculate" @click="сalculate(salary)">
             Рассчитать
           </button>
         </div>
@@ -71,7 +72,11 @@ export default {
       salary: "",
       paymentList: [],
       maxTax: 260000,
-      indicatorChange: false,
+      money: {
+        thousands: " ",
+        suffix: " ₽",
+        precision: 0,
+      },
     };
   },
   methods: {
@@ -98,6 +103,7 @@ export default {
     },
     сalculate(salary) {
       salary = salary.replace(/\s/g, "");
+      salary = salary.replace("₽", "");
       this.paymentList = [];
       if (salary == null || salary == 0) {
         this.paymentVisible = false;
@@ -133,18 +139,6 @@ export default {
     },
     closePopup() {
       this.$emit("closePopup");
-    },
-  },
-  computed: {
-    modelNumber: {
-      get() {
-        return this.indicatorChange
-          ? this.salary
-          : this.salary.toLocaleString();
-      },
-      set(value) {
-        this.salary = +value.replace(/\s/g, "");
-      },
     },
   },
   mounted() {
@@ -216,7 +210,10 @@ export default {
   background: #fff;
   border-radius: 30px;
   max-height: 90vh;
-  overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
   &__header {
     .title {
       font-family: Lab Grotesque;
