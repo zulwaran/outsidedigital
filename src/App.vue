@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="modal">
-      <button @click="visiblePopup=true">Налоговый вычет</button>
+      <button @click="visiblePopup = true">Налоговый вычет</button>
     </div>
     <v-popup
       v-if="visiblePopup"
@@ -38,6 +38,11 @@ export default {
   padding: 0;
 }
 #app {
+  font-family: Lab Grotesque;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
   background: linear-gradient(
       255.35deg,
       #dc3131 0.83%,
@@ -69,6 +74,7 @@ export default {
   }
 }
 button {
+  font-size: 16px;
   background-color: inherit;
   padding: 16px 32px;
   color: #fff;
